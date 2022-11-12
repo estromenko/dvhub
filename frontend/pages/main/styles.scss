@@ -1,0 +1,42 @@
+.main-page {
+  height: 100%;
+  margin-top: 50px;
+}
+
+.main-page-sidebar {
+  background-color: #f0f8ff;
+  border-right: 2px black solid;
+  height: 100%;
+  padding: 0 20px;
+  width: 200px;
+
+  &__account-link {
+    border-bottom: 2px black solid;
+    padding: 10px;
+  }
+
+  &__repo-list {
+    padding: 10px;
+  }
+}
+
+.sidebar-repo-list {
+  display: flex;
+  flex-direction: column;
+
+  &__link {
+    font-size: 24px;
+    opacity: 0.7;
+    text-decoration: none;
+    transition: opacity 0.2s ease-in-out;
+
+    &:active {
+      color: black;
+    }
+
+    &:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.pulls-list {
+  border: 2px var(--primary) solid;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  font-size: 28px;
+
+  &__pull {
+    padding: 10px;
+
+    &:not(:last-child) {
+      border-bottom: 2px var(--primary) solid;
+    }
+  }
+
+  &__row {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__link {
+    color: var(--primary);
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__pull-created-at {
+    font-size: 12px;
+  }
+}

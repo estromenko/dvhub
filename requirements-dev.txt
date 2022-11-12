@@ -1,0 +1,4 @@
+django-stubs==1.13.0
+mypy
+pylint
+pylint-django

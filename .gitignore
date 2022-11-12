@@ -1,0 +1,9 @@
+.idea
+.parcel-cache
+.vscode
+.env*
+__pycache__
+_postgres
+dist
+node_modules
+*.log

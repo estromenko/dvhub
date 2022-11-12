@@ -1,0 +1,10 @@
+.create-pull-request-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+
+  &__name {
+    margin-left: 10px;
+  }
+}

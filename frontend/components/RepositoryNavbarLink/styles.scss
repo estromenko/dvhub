@@ -1,0 +1,18 @@
+.repository-navbar-link {
+  border-radius: 10px 10px 0 0;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+
+  &_selected {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  &:hover {
+    background-color: var(--primary);
+    color: white;
+  }
+}
