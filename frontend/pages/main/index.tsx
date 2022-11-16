@@ -1,41 +1,22 @@
 import "./styles.scss";
 
 import { Repository } from "api/models";
+import useFetch, { ErrorReason } from "hooks/useFetch";
 import { observer } from "mobx-react-lite";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import store from "store";
-import { $fetch } from "utils/api";
 import { isAuthorized } from "utils/auth";
 
 const Main: FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [repositories, setRepositories] = useState<Repository[]>([]);
+  const url = `/api/user/${store.user?.id}/repositories/`;
+  const { data, loading } = useFetch<Repository[]>(url);
 
-  useEffect(() => {
-    if (!store.user) {
-      setIsLoading(false);
-      return;
-    }
-
-    const getRepositories = async () => {
-      setIsLoading(true);
-      const response = await $fetch(
-        `/api/user/${store.user?.id}/repositories/`,
-      );
-      const data = await response?.json();
-      setRepositories(data);
-    };
-
-    getRepositories().finally(() => {
-      setIsLoading(false);
-    });
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [store.user]);
-
-  if (isLoading) {
+  if (loading) {
     return <div />;
   }
+
+  const repositories = data || [];
 
   return (
     <div className="main-page">

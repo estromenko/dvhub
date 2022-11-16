@@ -4,9 +4,9 @@ import { Repository } from "api/models";
 import NotFoundMessage from "components/NotFoundMessage";
 import { FC, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { $fetch } from "utils/api";
 
 import RepositoryNavbarLink from "../../components/RepositoryNavbarLink";
+import useFetch from "../../hooks/useFetch";
 import Code from "./code";
 import Issues from "./issues";
 import PullRequests from "./pulls";
@@ -18,9 +18,11 @@ const Repository: FC = () => {
 
   const startPage = new URLSearchParams(location.search).get("page");
   const [page, setPage] = useState<string>(startPage || "");
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [repository, setRepository] = useState<Repository>();
+  const url = `/api/repositories/?owner__username=${username}&name=${name}`;
+  const { data, loading } = useFetch<Repository[]>(url);
+
+  const repository = data?.at(0);
 
   const getPage = () => {
     switch (page) {
@@ -44,26 +46,7 @@ const Repository: FC = () => {
     navigate(`${location.pathname}?${searchParams.toString()}`);
   }, [location.pathname, location.search, navigate, page]);
 
-  useEffect(() => {
-    const getRepository = async () => {
-      setIsLoading(true);
-
-      const response = await $fetch(
-        `/api/repositories/?owner__username=${username}&name=${name}`,
-      );
-      const data: Repository[] = await response?.json();
-
-      if (data.length === 1) {
-        setRepository(data[0]);
-      }
-    };
-
-    getRepository().finally(() => {
-      setIsLoading(false);
-    });
-  }, [name, username]);
-
-  if (isLoading) {
+  if (loading) {
     return <div />;
   }
 

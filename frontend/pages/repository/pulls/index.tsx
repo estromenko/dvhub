@@ -4,9 +4,10 @@ import { PullRequest, Repository } from "api/models";
 import CreatePullRequestModal from "components/CreatePullRequestModal";
 import CreationButton from "components/CreationButton";
 import PullRequestsList from "components/PullRequestsList";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useParams } from "react-router-dom";
-import { $fetch } from "utils/api";
+
+import useFetch from "../../../hooks/useFetch";
 
 type Properties = {
   repository: Repository;
@@ -14,27 +15,14 @@ type Properties = {
 
 const PullRequests: FC<Properties> = ({ repository }) => {
   const { name } = useParams();
-
-  const [pullRequests, setPullRequests] = useState<PullRequest[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [modalOpened, setModalOpened] = useState<boolean>(false);
+  const { data, loading } = useFetch<PullRequest[]>(
+    `/api/pulls/?repository__name=${name}`,
+  );
 
-  useEffect(() => {
-    const getPullRequests = async () => {
-      setIsLoading(true);
+  const pullRequests = data || [];
 
-      const response = await $fetch(`/api/pulls/?repository__name=${name}`);
-      const data = await response?.json();
-
-      setPullRequests(data);
-    };
-
-    getPullRequests().finally(() => {
-      setIsLoading(false);
-    });
-  }, [name]);
-
-  if (isLoading) {
+  if (loading) {
     return <div />;
   }
 

@@ -3,35 +3,25 @@ import "./styles.scss";
 import { PullRequest } from "api/models";
 import NotFoundMessage from "components/NotFoundMessage";
 import SubmitButton from "components/SubmitButton";
-import { FC, useEffect, useState } from "react";
+import useFetch from "hooks/useFetch";
+import { FC } from "react";
 import { Link, useParams } from "react-router-dom";
-import { $fetch } from "utils/api";
 
 const PullRequest: FC = () => {
-  const [loading, setLoading] = useState(true);
-  const [pullRequest, setPullRequest] = useState<PullRequest>();
-
   const { id } = useParams();
 
-  useEffect(() => {
-    const getPullRequest = async () => {
-      setLoading(true);
-
-      const response = await $fetch(`/api/pulls/${id}/`);
-      return response?.json();
-    };
-
-    getPullRequest()
-      .then((pr) => {
-        setPullRequest(pr);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [id]);
+  const {
+    data: pullRequest,
+    error,
+    loading,
+  } = useFetch<PullRequest>(`/api/pulls/${id}/`);
 
   if (loading) {
-    return <div />;
+    return <div>Loading</div>;
+  }
+
+  if (error) {
+    return <div>Error</div>;
   }
 
   if (!pullRequest) {
