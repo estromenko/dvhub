@@ -6,9 +6,14 @@ from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from apps.api.models import Repository, PullRequest
+from apps.api.models import Repository, PullRequest, Issue
 from apps.api.permissions import IsAuthorOrReadOnly, IsPublic
-from apps.api.serializers import RepositorySerializer, UserSerializer, PullRequestSerializer
+from apps.api.serializers import (
+    RepositorySerializer,
+    UserSerializer,
+    PullRequestSerializer,
+    IssueSerializer,
+)
 
 User = get_user_model()
 
@@ -61,3 +66,23 @@ class PullRequestViewSet(viewsets.ModelViewSet):  # pylint: disable=too-many-anc
     queryset = PullRequest.objects.all()
     serializer_class = PullRequestSerializer
     filterset_fields = ['name', 'repository__name']
+
+
+class IssueViewSet(viewsets.ModelViewSet):  # pylint: disable=too-many-ancestors
+    """ViewSet для управления issue'сами. """
+
+    permission_classes = [IsAuthorOrReadOnly]
+    queryset = Issue.objects.all()
+    serializer_class = IssueSerializer
+    filterset_fields = ['name', 'repository__name']
+
+
+class UserIssuesAPIView(generics.ListAPIView):
+    """Вьюха для получения issue пользователя. """
+
+    permission_classes = [IsAuthenticated]
+    queryset = Issue.objects.all()
+    serializer_class = IssueSerializer
+
+    def filter_queryset(self, request, *args, **kwargs):
+        return self.queryset.filter(owner_id=self.kwargs['pk'])

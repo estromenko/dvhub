@@ -12,6 +12,7 @@ from apps.api import views
 router = DefaultRouter()
 router.register('repositories', views.RepositoryViewSet, basename='repository')
 router.register('pulls', views.PullRequestViewSet, basename='pulls')
+router.register('issues', views.IssueViewSet, basename='issues')
 
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -19,5 +20,6 @@ urlpatterns = [
     path('user/current/', views.CurrentUserAPIView.as_view()),
     path('user/<int:pk>/pulls/', views.UserPullRequestsAPIView.as_view()),
     path('user/<int:pk>/repositories/', views.UserRepositoriesAPIView.as_view()),
+    path('user/<int:pk>/repositories/', views.UserIssuesAPIView.as_view()),
     *router.urls,
 ]

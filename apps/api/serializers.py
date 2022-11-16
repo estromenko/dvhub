@@ -37,3 +37,16 @@ class PullRequestSerializer(serializers.ModelSerializer):
             'comments',
         ]
         depth = 2
+
+
+class IssueSerializer(serializers.ModelSerializer):
+    """Сериализатор модели Issue. """
+
+    class Meta:  # pylint: disable=missing-class-docstring, too-few-public-methods
+        model = models.PullRequest
+        fields = [
+            'id', 'name', 'repository',
+            'owner', 'status', 'created_at',
+            'comments',
+        ]
+        depth = 2

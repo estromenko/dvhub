@@ -37,9 +37,17 @@ class Branch(models.Model):
 class Issue(models.Model):
     """Модель issue. """
 
+    STATUSES = (
+        ('open', 'Open'),
+        ('merged', 'Merged'),
+        ('closed', 'Closed'),
+    )
+
     name = models.CharField(max_length=512)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    repository = models.ForeignKey(Repository, on_delete=models.CASCADE)
+    status = models.CharField(max_length=64, choices=STATUSES)
 
     def __str__(self):
         return self.name
@@ -48,17 +56,9 @@ class Issue(models.Model):
 class IssueComment(models.Model):
     """Модель комментария к issue. """
 
-    STATUSES = (
-        ('open', 'Open'),
-        ('merged', 'Merged'),
-        ('closed', 'Closed'),
-    )
-
     text = models.TextField()
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    repository = models.ForeignKey(Repository, on_delete=models.CASCADE)
-    status = models.CharField(max_length=64, choices=STATUSES)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
