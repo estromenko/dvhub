@@ -14,6 +14,7 @@ const Main: FC = () => {
 
   useEffect(() => {
     if (!store.user) {
+      setIsLoading(false);
       return;
     }
 

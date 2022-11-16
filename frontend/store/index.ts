@@ -1,6 +1,8 @@
 import { User } from "api/models";
+import Cookie from "js-cookie";
 import { makeAutoObservable } from "mobx";
 import { $fetch } from "utils/api";
+import { accessTokenKey, refreshTokenKey } from "utils/auth";
 
 export class Store {
   user?: User = undefined;
@@ -14,8 +16,10 @@ export class Store {
   }
 
   async init() {
-    const response = await $fetch("/api/user/current/");
-    this.setUser(await response?.json());
+    if (Cookie.get(accessTokenKey) && Cookie.get(refreshTokenKey)) {
+      const response = await $fetch("/api/user/current/");
+      this.setUser(await response?.json());
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import "./global.css";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -14,9 +14,17 @@ import Repository from "./pages/repository";
 import store from "./store";
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    store.init().finally();
+    store.init().finally(() => {
+      setLoading(false);
+    });
   }, []);
+
+  if (loading) {
+    return <div />;
+  }
 
   return (
     <BrowserRouter>
