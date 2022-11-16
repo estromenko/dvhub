@@ -30,5 +30,10 @@ class PullRequestSerializer(serializers.ModelSerializer):
 
     class Meta:  # pylint: disable=missing-class-docstring, too-few-public-methods
         model = models.PullRequest
-        fields = serializers.ALL_FIELDS
+        fields = [
+            'id', 'name', 'repository',
+            'branch_from', 'branch_to',
+            'owner', 'status', 'created_at',
+            'comments',
+        ]
         depth = 2

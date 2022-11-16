@@ -20,7 +20,12 @@ const PullRequestsList: FC<Properties> = ({ pulls }) => (
           >
             {pullRequest.owner.username}/{pullRequest.repository.name}
           </Link>
-          <div>{pullRequest.name}</div>
+          <Link
+            to={`/pulls/${pullRequest.id}`}
+            className="pulls-list__pull-link"
+          >
+            {pullRequest.name}
+          </Link>
         </div>
         <div className="pulls-list__pull-created-at">
           #{pullRequest.id} opened at {pullRequest.created_at} by &nbsp;

@@ -90,7 +90,7 @@ class PullRequestComment(models.Model):
     """Модель комментария к issue. """
 
     text = models.TextField()
-    pull_request = models.ForeignKey(PullRequest, on_delete=models.CASCADE)
+    pull_request = models.ForeignKey(PullRequest, on_delete=models.CASCADE, related_name='comments')
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 

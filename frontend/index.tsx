@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Auth from "./pages/auth";
 import Main from "./pages/main";
 import NotFound from "./pages/notFound";
+import PullRequest from "./pages/pullRequest";
 import Pulls from "./pages/pulls";
 import Repository from "./pages/repository";
 import store from "./store";
@@ -22,6 +23,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/pulls/:id" element={<PullRequest />} />
         <Route path="/pulls" element={<Pulls />} />
         <Route path="/:username/:name" element={<Repository />} />
         <Route path="/auth" element={<Auth />} />
