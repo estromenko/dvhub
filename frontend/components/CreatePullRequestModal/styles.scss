@@ -3,8 +3,35 @@
   flex-direction: column;
   gap: 10px;
   justify-content: center;
+  padding: 0 20px;
 
   &__name {
     margin-left: 10px;
+    width: 300px;
+  }
+
+  &__title {
+    line-height: 0;
+    text-align: center;
+  }
+
+  &__branch-selectors {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+
+    select {
+      border: 2px var(--primary) solid;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 0 5px;
+      outline: none;
+      padding: 5px;
+
+      option {
+        background-color: black;
+        padding: 5px;
+      }
+    }
   }
 }

@@ -19,20 +19,31 @@ const CreatePullRequestModal: FC<Properties> = ({
 }) => (
   <CustomModal isOpen={isOpen} setIsOpen={setIsOpen}>
     <div className="create-pull-request-modal">
+      <h3 className="create-pull-request-modal__title">
+        Create new pull request
+      </h3>
       <label>
         Name
         <Input className="create-pull-request-modal__name" />
       </label>
-      <select>
-        {repository?.branches.map((branch) => (
-          <option key={branch.id}>{branch.name}</option>
-        ))}
-      </select>
-      <select>
-        {repository?.branches.map((branch) => (
-          <option key={branch.id}>{branch.name}</option>
-        ))}
-      </select>
+      <div className="create-pull-request-modal__branch-selectors">
+        <label>
+          From
+          <select>
+            {repository?.branches.map((branch) => (
+              <option key={branch.id}>{branch.name}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          To
+          <select>
+            {repository?.branches.map((branch) => (
+              <option key={branch.id}>{branch.name}</option>
+            ))}
+          </select>
+        </label>
+      </div>
       <SubmitButton type="button" onClick={() => setIsOpen(false)}>
         Create
       </SubmitButton>
