@@ -96,7 +96,7 @@ const Auth: FC = () => {
         {error && <div className="form-fields__error">{error}</div>}
         <SubmitButton
           type="button"
-          className="form-fields__input-row"
+          className="form-fields__input-row form-fields__input-row_center"
           onClick={onClick}
         >
           {signUpSelected ? "Sign Up" : "Sign In"}

@@ -31,6 +31,10 @@
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+
+    &_center {
+      justify-content: center;
+    }
   }
 
   &__error {
