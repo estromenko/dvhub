@@ -22,7 +22,8 @@ const Pulls: FC = () => {
     };
 
     getPullRequests().finally();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [store.user]);
 
   return (
     <div className="pulls-page">
