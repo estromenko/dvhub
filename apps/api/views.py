@@ -1,6 +1,7 @@
 """Модуль, содержащий вьюхи приложения api. """
 
 from django.contrib.auth import get_user_model
+from django.db.models.functions import Extract
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework import viewsets
@@ -45,6 +46,15 @@ class UserPullRequestsAPIView(generics.ListAPIView):
     serializer_class = PullRequestSerializer
 
     def filter_queryset(self, queryset):
+        lookup_period = self.request.GET.get('period')  # type: ignore
+        lookup_value = self.request.GET.get('value')  # type: ignore
+
+        queryset = self.get_queryset()
+        if lookup_period and lookup_value:
+            queryset = queryset.annotate(
+                period=Extract('created_at', lookup_period),
+            ).filter(period=lookup_value)
+
         return queryset.filter(owner_id=self.kwargs['pk'])
 
 
