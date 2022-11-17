@@ -2,7 +2,6 @@
 
 from django.contrib.auth import get_user_model
 from django.db.models.functions import Extract
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
