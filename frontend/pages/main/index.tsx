@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 import { Repository } from "api/models";
-import useFetch, { ErrorReason } from "hooks/useFetch";
+import useFetch from "hooks/useFetch";
 import { observer } from "mobx-react-lite";
 import { FC } from "react";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import store from "store";
 import { isAuthorized } from "utils/auth";
 
 const Main: FC = () => {
-  const url = `/api/user/${store.user?.id}/repositories/`;
+  const url = `/api/repositories/${store.user?.username}/`;
   const { data, loading } = useFetch<Repository[]>(url);
 
   if (loading) {

@@ -40,3 +40,5 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': True,
 }
+
+REPOSITORIES_DIR = BASE_DIR / '_repositories'

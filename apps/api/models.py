@@ -3,35 +3,9 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from apps.repositories.models import Repository
+
 User = get_user_model()
-
-
-class Repository(models.Model):
-    """Модель репозитория. """
-
-    name = models.CharField(max_length=255)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    public = models.BooleanField(default=True)
-    description = models.TextField()
-
-    objects = models.Manager()
-
-    def __str__(self):
-        return f'{self.owner.username}/{self.name}'
-
-    class Meta:  # pylint: disable=missing-class-docstring, too-few-public-methods
-        unique_together = ('name', 'owner')
-        verbose_name_plural = 'Repositories'
-
-
-class Branch(models.Model):
-    """Модель ветки. """
-
-    repository = models.ForeignKey(Repository, on_delete=models.CASCADE, related_name='branches')
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return f'{self.repository.owner.username}/{self.repository.name}@{self.name}'
 
 
 class Issue(models.Model):
@@ -76,10 +50,10 @@ class PullRequest(models.Model):
 
     name = models.CharField(max_length=255)
     repository = models.ForeignKey(Repository, on_delete=models.CASCADE)
-    branch_from = models.ForeignKey(Branch, on_delete=models.CASCADE, related_name='pulls_from')
-    branch_to = models.ForeignKey(Branch, on_delete=models.CASCADE, related_name='pulls_to')
+    branch_from = models.CharField(max_length=255)
+    branch_to = models.CharField(max_length=255)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    status = models.CharField(max_length=64, choices=STATUSES)
+    status = models.CharField(max_length=64, choices=STATUSES, default='open')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

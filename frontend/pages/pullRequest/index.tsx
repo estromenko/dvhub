@@ -46,11 +46,11 @@ const PullRequest: FC = () => {
         <div className="pull-request-page__branches">
           From
           <div className="pull-request-page__branch">
-            {pullRequest.branch_from.name}
+            {pullRequest.branch_from}
           </div>
           to
           <div className="pull-request-page__branch">
-            {pullRequest.branch_to.name}
+            {pullRequest.branch_to}
           </div>
         </div>
         <div className="pull-request-page__created-at">

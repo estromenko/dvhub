@@ -6,4 +6,5 @@ __pycache__
 _postgres
 dist
 node_modules
+_repositories
 *.log

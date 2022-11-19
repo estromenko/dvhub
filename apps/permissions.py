@@ -1,4 +1,4 @@
-"""Модуль, содержащий права приложения api. """
+"""Модуль, содержащий права. """
 
 from rest_framework import permissions
 

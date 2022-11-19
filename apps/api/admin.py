@@ -4,16 +4,6 @@ from django.contrib import admin
 from apps.api import models
 
 
-@admin.register(models.Repository)
-class RepositoryAdmin(admin.ModelAdmin):
-    """Админка репозиториев. """
-
-
-@admin.register(models.Branch)
-class BranchAdmin(admin.ModelAdmin):
-    """Админка веток. """
-
-
 @admin.register(models.PullRequest)
 class PullRequestAdmin(admin.ModelAdmin):
     """Админка pull request'ов. """

@@ -2,11 +2,11 @@ import "./styles.scss";
 
 import { Repository } from "api/models";
 import NotFoundMessage from "components/NotFoundMessage";
+import RepositoryNavbarLink from "components/RepositoryNavbarLink";
+import useFetch from "hooks/useFetch";
 import { FC, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import RepositoryNavbarLink from "../../components/RepositoryNavbarLink";
-import useFetch from "../../hooks/useFetch";
 import Code from "./code";
 import Issues from "./issues";
 import PullRequests from "./pulls";
@@ -19,21 +19,21 @@ const Repository: FC = () => {
   const startPage = new URLSearchParams(location.search).get("page");
   const [page, setPage] = useState<string>(startPage || "");
 
-  const url = `/api/repositories/?owner__username=${username}&name=${name}`;
-  const { data, loading } = useFetch<Repository[]>(url);
+  const url = `/api/repositories/${username}/${name}/`;
+  const { data, loading } = useFetch<Repository>(url);
 
-  const repository = data?.at(0);
+  const repository = data;
 
   const getPage = () => {
     switch (page) {
       case "code":
-        return <Code />;
+        return <Code repository={repository!} />;
       case "issues":
         return <Issues />;
       case "pulls":
         return <PullRequests repository={repository!} />;
       default:
-        return <Code />;
+        return <Code repository={repository!} />;
     }
   };
 

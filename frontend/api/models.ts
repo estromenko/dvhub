@@ -1,8 +1,3 @@
-export type Branch = {
-  id: number;
-  name: string;
-};
-
 export type User = {
   email: string;
   id: number;
@@ -11,11 +6,12 @@ export type User = {
 };
 
 export type Repository = {
-  branches: Branch[];
+  branches: string[];
   id: number;
   name: string;
   owner: User;
   public: boolean;
+  files: string[];
 };
 
 export type PullRequestComment = {
@@ -30,8 +26,8 @@ export type PullRequest = {
   id: number;
   name: string;
   owner: User;
-  branch_from: Branch;
-  branch_to: Branch;
+  branch_from: string;
+  branch_to: string;
   repository: Repository;
   comments: PullRequestComment[];
   status: string;
