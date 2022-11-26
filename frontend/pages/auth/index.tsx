@@ -20,7 +20,7 @@ const Auth: FC = () => {
   };
 
   const onClick = () => {
-    fetch("/api/token/", {
+    fetch("/api/auth/token/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

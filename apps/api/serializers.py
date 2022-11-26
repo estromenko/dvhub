@@ -9,14 +9,6 @@ from apps.repositories.models import Repository
 User = get_user_model()
 
 
-class UserSerializer(serializers.ModelSerializer):
-    """Сериализатор модели пользователя. """
-
-    class Meta:  # pylint: disable=missing-class-docstring, too-few-public-methods
-        model = User
-        exclude = ['first_name', 'last_name', 'password']
-
-
 class PullRequestSerializer(serializers.ModelSerializer):
     """Сериализатор модели pull request'а. """
 

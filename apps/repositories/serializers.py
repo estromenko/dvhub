@@ -22,9 +22,3 @@ class RepositorySerializer(serializers.ModelSerializer):
             'id', 'name', 'owner', 'public', 'description',
             'branches', 'files',
         ]
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        exclude = ['password', 'first_name', 'last_name']

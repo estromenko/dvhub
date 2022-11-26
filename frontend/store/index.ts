@@ -17,7 +17,7 @@ export class Store {
 
   async init() {
     if (Cookie.get(accessTokenKey) && Cookie.get(refreshTokenKey)) {
-      const response = await $fetch("/api/user/current/");
+      const response = await $fetch("/api/auth/user/");
       this.setUser(await response?.json());
     }
   }

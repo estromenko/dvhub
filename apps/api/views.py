@@ -9,22 +9,11 @@ from rest_framework.permissions import IsAuthenticated
 from apps.api.models import PullRequest, Issue
 from apps.permissions import IsAuthorOrReadOnly
 from apps.api.serializers import (
-    UserSerializer,
     PullRequestSerializer,
     IssueSerializer,
 )
 
 User = get_user_model()
-
-
-class CurrentUserAPIView(generics.RetrieveAPIView):
-    """Вьюха для получения информации о текущем пользователе. """
-
-    permission_classes = [IsAuthenticated]
-    serializer_class = UserSerializer
-
-    def get_object(self):
-        return self.request.user
 
 
 class UserPullRequestsAPIView(generics.ListAPIView):

@@ -15,7 +15,7 @@ export const logout = () => {
 export const updateTokens = async () => {
   const refreshToken = Cookie.get(refreshTokenKey);
 
-  const response = await fetch("/api/token/refresh/", {
+  const response = await fetch("/api/auth/token/refresh/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
