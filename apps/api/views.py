@@ -6,11 +6,11 @@ from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from apps.api.models import PullRequest, Issue
+from apps.api.models import PullRequest, Issue, PullRequestComment
 from apps.permissions import IsAuthorOrReadOnly
 from apps.api.serializers import (
     PullRequestSerializer,
-    IssueSerializer,
+    IssueSerializer, PullRequestCommentSerializer,
 )
 
 User = get_user_model()
@@ -63,3 +63,11 @@ class UserIssuesAPIView(generics.ListAPIView):
 
     def filter_queryset(self, request, *args, **kwargs):
         return self.queryset.filter(owner_id=self.kwargs['pk'])
+
+
+class PullRequestCommentsAPIView(generics.ListCreateAPIView):
+    queryset = PullRequestComment.objects.all()
+    serializer_class = PullRequestCommentSerializer
+
+    def get_queryset(self):
+        return super().get_queryset().filter(pull_request_id=self.kwargs['pk'])

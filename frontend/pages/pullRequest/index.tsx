@@ -4,17 +4,40 @@ import { PullRequest } from "api/models";
 import NotFoundMessage from "components/NotFoundMessage";
 import SubmitButton from "components/SubmitButton";
 import useFetch from "hooks/useFetch";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+
+import store from "../../store";
+import { $fetch } from "../../utils/api";
 
 const PullRequest: FC = () => {
   const { id } = useParams();
+  const [commentText, setCommentText] = useState<string>("");
 
   const {
     data: pullRequest,
     error,
     loading,
   } = useFetch<PullRequest>(`/api/pulls/${id}/`);
+
+  const onClick = async () => {
+    if (!commentText) {
+      return;
+    }
+
+    const response = await $fetch(`/api/pulls/${id}/comments/`, {
+      method: "POST",
+      body: JSON.stringify({
+        text: commentText,
+        owner: store.user!.id,
+        pull_request: id,
+      }),
+    });
+
+    if (response?.status === 201) {
+      window.location.reload();
+    }
+  };
 
   if (loading) {
     return <div>Loading</div>;
@@ -83,8 +106,9 @@ const PullRequest: FC = () => {
         <textarea
           className="pull-request-page__new-comment-field"
           placeholder="Write comment"
+          onChange={(event) => setCommentText(event.target.value)}
         />
-        <SubmitButton>Send Comment</SubmitButton>
+        <SubmitButton onClick={onClick}>Send Comment</SubmitButton>
       </div>
     </div>
   );

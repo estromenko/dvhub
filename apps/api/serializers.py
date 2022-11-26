@@ -48,3 +48,9 @@ class IssueSerializer(serializers.ModelSerializer):
             'comments',
         ]
         depth = 2
+
+
+class PullRequestCommentSerializer(serializers.ModelSerializer):
+    class Meta:  # pylint: disable=missing-class-docstring, too-few-public-methods
+        model = models.PullRequestComment
+        fields = serializers.ALL_FIELDS

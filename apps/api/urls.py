@@ -15,5 +15,6 @@ router.register('issues', views.IssueViewSet, basename='issues')
 
 urlpatterns = [
     path('user/<int:pk>/pulls/', views.UserPullRequestsAPIView.as_view()),
+    path('pulls/<int:pk>/comments/', views.PullRequestCommentsAPIView.as_view()),
     *router.urls,
 ]
