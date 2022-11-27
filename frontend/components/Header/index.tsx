@@ -1,5 +1,6 @@
 import "./styles.scss";
 
+import profileImage from "assets/profile.svg";
 import { observer } from "mobx-react-lite";
 import { FC } from "react";
 import { Link } from "react-router-dom";
@@ -30,13 +31,21 @@ const Header: FC = () => (
         )}
       </nav>
     )}
-    <Link
-      to="/auth/"
-      className="header__link header__auth-link"
-      onClick={logout}
-    >
-      {isAuthorized() ? "Logout" : "Sign Up / Sign In"}
-    </Link>
+    <div className="header__right-links">
+      {isAuthorized() && (
+        <Link to="/profile">
+          <img src={profileImage} alt="Profile" className="header__profile" />
+        </Link>
+      )}
+
+      <Link
+        to="/auth/"
+        className="header__link header__auth-link"
+        onClick={logout}
+      >
+        {isAuthorized() ? "Logout" : "Sign Up / Sign In"}
+      </Link>
+    </div>
   </header>
 );
 

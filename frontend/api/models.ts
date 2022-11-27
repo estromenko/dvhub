@@ -3,6 +3,7 @@ export type User = {
   id: number;
   is_staff: boolean;
   username: string;
+  date_joined: string;
 };
 
 export type Repository = {
