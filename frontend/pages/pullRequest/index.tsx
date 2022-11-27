@@ -20,7 +20,7 @@ const PullRequest: FC = () => {
     loading,
   } = useFetch<PullRequest>(`/api/pulls/${id}/`);
 
-  const onClick = async () => {
+  const onWriteCommentClick = async () => {
     if (!commentText) {
       return;
     }
@@ -35,6 +35,21 @@ const PullRequest: FC = () => {
     });
 
     if (response?.status === 201) {
+      window.location.reload();
+    }
+  };
+
+  const onMergeClick = async () => {
+    const response = await $fetch(`/api/pulls/${id}/`, {
+      method: "PUT",
+      body: JSON.stringify({
+        ...pullRequest,
+        repository_id: pullRequest!.repository.id,
+        status: "merged",
+      }),
+    });
+
+    if (response?.status !== 400) {
       window.location.reload();
     }
   };
@@ -82,7 +97,12 @@ const PullRequest: FC = () => {
       </div>
       <div className="pull-request-page__actions">
         Actions:
-        <button type="button" className="pull-request-page__action">
+        <button
+          type="button"
+          className="pull-request-page__action"
+          onClick={onMergeClick}
+          disabled={pullRequest!.status === "merged"}
+        >
           Merge
         </button>
         <button type="button" className="pull-request-page__action">
@@ -108,7 +128,7 @@ const PullRequest: FC = () => {
           placeholder="Write comment"
           onChange={(event) => setCommentText(event.target.value)}
         />
-        <SubmitButton onClick={onClick}>Send Comment</SubmitButton>
+        <SubmitButton onClick={onWriteCommentClick}>Send Comment</SubmitButton>
       </div>
     </div>
   );

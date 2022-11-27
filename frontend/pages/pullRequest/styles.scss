@@ -59,6 +59,16 @@
       background-color: white;
       color: var(--primary);
     }
+
+    &:disabled {
+      opacity: 0.5;
+
+      &:hover {
+        background-color: var(--primary);
+        color: white;
+        cursor: not-allowed;
+      }
+    }
   }
 
   &__actions {

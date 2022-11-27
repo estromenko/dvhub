@@ -40,7 +40,7 @@ class PullRequestViewSet(viewsets.ModelViewSet):  # pylint: disable=too-many-anc
     """ViewSet для управления pull request'ами. """
 
     permission_classes = [IsAuthorOrReadOnly]
-    queryset = PullRequest.objects.all()
+    queryset = PullRequest.objects.order_by('-created_at')
     serializer_class = PullRequestSerializer
     filterset_fields = ['name', 'repository__name']
 
