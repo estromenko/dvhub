@@ -9,8 +9,10 @@ import SubmitButton from "../../components/SubmitButton";
 const Auth: FC = () => {
   const [signUpSelected, setSignUpSelected] = useState<boolean>(true);
 
+  const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [repeatedPassword, setRepeatedPassword] = useState<string>("");
 
   const [error, setError] = useState("");
 
@@ -19,26 +21,73 @@ const Auth: FC = () => {
     setSignUpSelected(!signUpSelected);
   };
 
-  const onClick = () => {
-    fetch("/api/auth/token/", {
+  const login = async () => {
+    const response = await fetch("/api/auth/token/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ username, password }),
-    }).then((response) => {
-      if (response.status >= 400) {
-        setError("Username or password is wrong");
-        return;
-      }
-
-      response.json().then((data) => {
-        Cookie.set("accessToken", data.access);
-        Cookie.set("refreshToken", data.refresh);
-
-        window.location.assign("/");
-      });
     });
+
+    if (response.status >= 400) {
+      setError("Username or password is wrong");
+      return;
+    }
+
+    const data = await response.json();
+
+    Cookie.set("accessToken", data.access);
+    Cookie.set("refreshToken", data.refresh);
+
+    window.location.assign("/");
+  };
+
+  const register = async () => {
+    const response = await fetch("/api/auth/register/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        email,
+      }),
+    });
+
+    if (response.status !== 201) {
+      setError("Failed to register user");
+      return;
+    }
+
+    const data = await response.json();
+
+    Cookie.set("accessToken", data.access);
+    Cookie.set("refreshToken", data.refresh);
+
+    window.location.assign("/");
+  };
+
+  const onSignInClick = () => {
+    login().finally();
+  };
+
+  const onSignUpClick = () => {
+    if (repeatedPassword !== password) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    register().finally();
+  };
+
+  const onClick = () => {
+    if (signUpSelected) {
+      onSignUpClick();
+    } else {
+      onSignInClick();
+    }
   };
 
   return (
@@ -76,7 +125,11 @@ const Auth: FC = () => {
         {signUpSelected && (
           <label className="form-fields__input-row">
             Email
-            <Input type="email" />
+            <Input
+              type="email"
+              required
+              onChange={(event) => setEmail(event.target.value)}
+            />
           </label>
         )}
         <label className="form-fields__input-row">
@@ -84,13 +137,19 @@ const Auth: FC = () => {
           <Input
             name="password"
             type="password"
+            required
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
         {signUpSelected && (
           <label className="form-fields__input-row">
             Repeat Password
-            <Input type="password" />
+            <Input
+              type="password"
+              name="repeated-password"
+              required
+              onChange={(event) => setRepeatedPassword(event.target.value)}
+            />
           </label>
         )}
         {error && <div className="form-fields__error">{error}</div>}

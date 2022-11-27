@@ -10,3 +10,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:  # pylint: disable=missing-class-docstring, too-few-public-methods
         model = User
         exclude = ['first_name', 'last_name', 'password']
+
+
+class RegistrationSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    username = serializers.CharField()
+    password = serializers.CharField()
