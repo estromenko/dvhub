@@ -22,3 +22,8 @@ class IssueAdmin(admin.ModelAdmin):
 @admin.register(models.IssueComment)
 class IssueCommentAdmin(admin.ModelAdmin):
     """Админка комментариев к issue. """
+
+
+@admin.register(models.SSHKey)
+class SSHKeyAdmin(admin.ModelAdmin):
+    """Админка ssh-ключей. """

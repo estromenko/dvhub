@@ -74,3 +74,15 @@ class PullRequestComment(models.Model):
             f'{self.pull_request.repository.name}: '
             f'{self.text}'
         )
+
+
+class SSHKey(models.Model):
+    """Модель ssh-ключа. """
+
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, unique=True)
+    key = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

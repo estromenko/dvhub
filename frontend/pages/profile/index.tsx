@@ -1,5 +1,6 @@
 import "./styles.scss";
 
+import SSHKeysList from "components/SSHKeysList";
 import { FC, useEffect } from "react";
 
 import store from "../../store";
@@ -14,11 +15,14 @@ const Profile: FC = () => {
 
   return (
     <div className="profile-page">
-      <ul>
-        <li>{store.user!.username}</li>
-        <li>Email: {store.user!.email}</li>
-        <li>Joined at: {store.user!.date_joined}</li>
-      </ul>
+      <div className="profile-page__row">
+        <ul>
+          <li>{store.user!.username}</li>
+          <li>Email: {store.user!.email}</li>
+          <li>Joined at: {store.user!.date_joined}</li>
+        </ul>
+        <SSHKeysList />
+      </div>
     </div>
   );
 };

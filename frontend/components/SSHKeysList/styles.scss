@@ -1,0 +1,49 @@
+.ssh-keys-list {
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  min-height: calc(100vh - 110px);
+  padding: 10px;
+  text-align: center;
+  width: 50%;
+
+  &__create-first-one-button {
+    background: none;
+    border: 0;
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: bold;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  &__add-button {
+    margin-bottom: 10px;
+  }
+
+  &__values {
+    border: 2px var(--primary) solid;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+  }
+
+  &__row {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 15px;
+
+    &:not(:last-child) {
+      border-bottom: 2px var(--primary) solid;
+    }
+  }
+
+  &__key {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

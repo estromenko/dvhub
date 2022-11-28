@@ -1,4 +1,9 @@
 .profile-page {
   margin-top: 50px;
   padding: 20px;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
 }

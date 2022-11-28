@@ -12,6 +12,7 @@ from apps.api import views
 router = DefaultRouter()
 router.register('pulls', views.PullRequestViewSet, basename='pulls')
 router.register('issues', views.IssueViewSet, basename='issues')
+router.register('ssh-keys', views.SSHKeysViewSet, basename='ssh-keys')
 
 urlpatterns = [
     path('user/<int:pk>/pulls/', views.UserPullRequestsAPIView.as_view()),

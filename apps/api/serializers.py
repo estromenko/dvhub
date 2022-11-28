@@ -54,3 +54,11 @@ class PullRequestCommentSerializer(serializers.ModelSerializer):
     class Meta:  # pylint: disable=missing-class-docstring, too-few-public-methods
         model = models.PullRequestComment
         fields = serializers.ALL_FIELDS
+
+
+class SSHKeySerializer(serializers.ModelSerializer):
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:  # pylint: disable=missing-class-docstring, too-few-public-methods
+        model = models.SSHKey
+        fields = serializers.ALL_FIELDS

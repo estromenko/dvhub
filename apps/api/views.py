@@ -6,11 +6,17 @@ from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from apps.api.models import PullRequest, Issue, PullRequestComment
-from apps.permissions import IsAuthorOrReadOnly
+from apps.api.models import (
+    PullRequest,
+    Issue,
+    PullRequestComment,
+    SSHKey,
+)
+from apps.permissions import IsAuthorOrReadOnly, IsOwner
 from apps.api.serializers import (
     PullRequestSerializer,
     IssueSerializer, PullRequestCommentSerializer,
+    SSHKeySerializer,
 )
 
 User = get_user_model()
@@ -71,3 +77,12 @@ class PullRequestCommentsAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return super().get_queryset().filter(pull_request_id=self.kwargs['pk'])
+
+
+class SSHKeysViewSet(viewsets.ModelViewSet):
+    queryset = SSHKey.objects.all()
+    serializer_class = SSHKeySerializer
+    permission_classes = [IsOwner]
+
+    def get_queryset(self):
+        return super().get_queryset().filter(owner_id=self.request.user.id)

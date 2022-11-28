@@ -33,3 +33,10 @@ export type PullRequest = {
   comments: PullRequestComment[];
   status: string;
 };
+
+export type SSHKey = {
+  id: number;
+  name: string;
+  created_at: string;
+  key: string;
+};
