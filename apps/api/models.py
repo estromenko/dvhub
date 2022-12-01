@@ -13,7 +13,6 @@ class Issue(models.Model):
 
     STATUSES = (
         ('open', 'Open'),
-        ('merged', 'Merged'),
         ('closed', 'Closed'),
     )
 
@@ -21,7 +20,7 @@ class Issue(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     repository = models.ForeignKey(Repository, on_delete=models.CASCADE)
-    status = models.CharField(max_length=64, choices=STATUSES)
+    status = models.CharField(max_length=64, choices=STATUSES, default='open')
 
     def __str__(self):
         return self.name
@@ -31,7 +30,7 @@ class IssueComment(models.Model):
     """Модель комментария к issue. """
 
     text = models.TextField()
-    issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='comments')
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 

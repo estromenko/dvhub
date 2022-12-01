@@ -6,6 +6,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
 import Auth from "./pages/auth";
+import Issue from "./pages/issue";
+import Issues from "./pages/issues";
 import Main from "./pages/main";
 import NotFound from "./pages/notFound";
 import Profile from "./pages/profile";
@@ -34,6 +36,8 @@ const App = () => {
         <Route path="/" element={<Main />} />
         <Route path="/pulls/:id" element={<PullRequest />} />
         <Route path="/pulls" element={<Pulls />} />
+        <Route path="/issues/:id" element={<Issue />} />
+        <Route path="/issues" element={<Issues />} />
         <Route path="/:username/:name" element={<Repository />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/profile" element={<Profile />} />

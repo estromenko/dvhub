@@ -1,0 +1,104 @@
+.issue-page {
+  margin-top: 50px;
+  padding: 20px;
+
+  &__info {
+    border-bottom: 1px var(--primary) solid;
+    font-size: 32px;
+    padding-bottom: 20px;
+  }
+
+  &__info-row {
+    align-items: center;
+    display: flex;
+  }
+
+  &__status {
+    color: grey;
+    font-size: 24px;
+    margin-right: 5px;
+  }
+
+  &__created-at {
+    font-size: 12px;
+  }
+
+  &__repository-link {
+    color: var(--primary);
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__action {
+    background-color: var(--primary);
+    border: 2px var(--primary) solid;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    padding: 5px 10px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: white;
+      color: var(--primary);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+
+      &:hover {
+        background-color: var(--primary);
+        color: white;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__actions {
+    align-items: center;
+    display: flex;
+    font-weight: bold;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  &__comment {
+    border: 2px var(--primary) solid;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    margin-top: 20px;
+    padding: 10px;
+  }
+
+  &__comment-info {
+    font-size: 12px;
+  }
+
+  &__comment-owner {
+    color: var(--primary);
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  &__new-comment-area {
+    display: flex;
+    margin: 20px 50px;
+  }
+
+  &__new-comment-field {
+    border: 2px var(--primary) solid;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    margin-right: 20px;
+    outline: none;
+    overflow: auto;
+    padding: 10px;
+    resize: vertical;
+    width: 100%;
+  }
+}

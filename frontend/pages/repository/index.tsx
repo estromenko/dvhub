@@ -29,7 +29,7 @@ const Repository: FC = () => {
       case "code":
         return <Code repository={repository!} />;
       case "issues":
-        return <Issues />;
+        return <Issues repository={repository!} />;
       case "pulls":
         return <PullRequests repository={repository!} />;
       default:

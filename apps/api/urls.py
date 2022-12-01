@@ -17,5 +17,6 @@ router.register('ssh-keys', views.SSHKeysViewSet, basename='ssh-keys')
 urlpatterns = [
     path('user/<int:pk>/pulls/', views.UserPullRequestsAPIView.as_view()),
     path('pulls/<int:pk>/comments/', views.PullRequestCommentsAPIView.as_view()),
+    path('issues/<int:pk>/comments/', views.IssueCommentsAPIView.as_view()),
     *router.urls,
 ]

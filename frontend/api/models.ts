@@ -34,6 +34,23 @@ export type PullRequest = {
   status: string;
 };
 
+export type IssueComment = {
+  id: number;
+  text: string;
+  owner: User;
+  created_at: string;
+};
+
+export type Issue = {
+  created_at: string;
+  id: number;
+  name: string;
+  owner: User;
+  repository: Repository;
+  comments: IssueComment[];
+  status: string;
+};
+
 export type SSHKey = {
   id: number;
   name: string;

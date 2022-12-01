@@ -40,12 +40,26 @@ class PullRequestSerializer(serializers.ModelSerializer):
 class IssueSerializer(serializers.ModelSerializer):
     """Сериализатор модели Issue. """
 
+    owner_id = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        source='owner',
+        default=serializers.CurrentUserDefault(),
+        write_only=True,
+    )
+
+    repository_id = serializers.PrimaryKeyRelatedField(
+        queryset=Repository.objects.all(),
+        source='repository',
+        write_only=True,
+    )
+
     class Meta:  # pylint: disable=missing-class-docstring, too-few-public-methods
-        model = models.PullRequest
+        model = models.Issue
         fields = [
             'id', 'name', 'repository',
             'owner', 'status', 'created_at',
             'comments',
+            'owner_id', 'repository_id',
         ]
         depth = 2
 
@@ -54,6 +68,12 @@ class PullRequestCommentSerializer(serializers.ModelSerializer):
     class Meta:  # pylint: disable=missing-class-docstring, too-few-public-methods
         model = models.PullRequestComment
         fields = serializers.ALL_FIELDS
+
+class IssueCommentSerializer(serializers.ModelSerializer):
+    class Meta:  # pylint: disable=missing-class-docstring, too-few-public-methods
+        model = models.IssueComment
+        fields = serializers.ALL_FIELDS
+
 
 
 class SSHKeySerializer(serializers.ModelSerializer):

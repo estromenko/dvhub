@@ -4,19 +4,19 @@ from django.contrib.auth import get_user_model
 from django.db.models.functions import Extract
 from rest_framework import generics
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from apps.api.models import (
     PullRequest,
     Issue,
     PullRequestComment,
-    SSHKey,
+    SSHKey, IssueComment,
 )
 from apps.permissions import IsAuthorOrReadOnly, IsOwner
 from apps.api.serializers import (
     PullRequestSerializer,
     IssueSerializer, PullRequestCommentSerializer,
-    SSHKeySerializer,
+    SSHKeySerializer, IssueCommentSerializer,
 )
 
 User = get_user_model()
@@ -54,8 +54,8 @@ class PullRequestViewSet(viewsets.ModelViewSet):  # pylint: disable=too-many-anc
 class IssueViewSet(viewsets.ModelViewSet):  # pylint: disable=too-many-ancestors
     """ViewSet для управления issue'сами. """
 
-    permission_classes = [IsAuthorOrReadOnly]
-    queryset = Issue.objects.all()
+    permission_classes = [IsAuthorOrReadOnly, IsAuthenticatedOrReadOnly]
+    queryset = Issue.objects.order_by('-created_at')
     serializer_class = IssueSerializer
     filterset_fields = ['name', 'repository__name']
 
@@ -77,6 +77,14 @@ class PullRequestCommentsAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return super().get_queryset().filter(pull_request_id=self.kwargs['pk'])
+
+
+class IssueCommentsAPIView(generics.ListCreateAPIView):
+    queryset = IssueComment.objects.all()
+    serializer_class = IssueCommentSerializer
+
+    def get_queryset(self):
+        return super().get_queryset().filter(issue_id=self.kwargs['pk'])
 
 
 class SSHKeysViewSet(viewsets.ModelViewSet):

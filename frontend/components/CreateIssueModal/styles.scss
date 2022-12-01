@@ -1,0 +1,22 @@
+.create-issue-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  padding: 0 20px;
+
+  &__name {
+    margin-left: 10px;
+    width: 300px;
+  }
+
+  &__title {
+    line-height: 0;
+    text-align: center;
+  }
+
+  &__error {
+    color: red;
+    text-align: center;
+  }
+}
