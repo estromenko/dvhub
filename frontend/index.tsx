@@ -13,6 +13,7 @@ import NotFound from "./pages/notFound";
 import Profile from "./pages/profile";
 import PullRequest from "./pages/pullRequest";
 import Pulls from "./pages/pulls";
+import Repositories from "./pages/repositories";
 import Repository from "./pages/repository";
 import store from "./store";
 
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/:username/:name" element={<Repository />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/repositories" element={<Repositories />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
