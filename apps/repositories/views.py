@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.db import transaction
+from django.views.static import serve
 from rest_framework import views, viewsets, generics
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -42,3 +44,10 @@ class UserRepositoriesAPIView(BaseRepositoryAPIView, generics.ListCreateAPIView)
     def filter_queryset(self, queryset):
         filtered_queryset = super().filter_queryset(queryset)
         return filtered_queryset.filter(owner__username=self.kwargs['username'])
+
+
+class RepositoryFilesAPIView(BaseRepositoryAPIView):
+    @staticmethod
+    def get(request, username, name, path):
+        repository_path = settings.REPOSITORIES_DIR / username / name
+        return serve(request, path, document_root=repository_path, show_indexes=True)
