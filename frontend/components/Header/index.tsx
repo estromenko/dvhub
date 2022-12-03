@@ -1,5 +1,6 @@
 import "./styles.scss";
 
+import logoImage from "assets/logo.png";
 import profileImage from "assets/profile.svg";
 import { observer } from "mobx-react-lite";
 import { FC } from "react";
@@ -11,6 +12,7 @@ import store from "../../store";
 const Header: FC = () => (
   <header className="header">
     <Link to="/" className="header__link header__logo">
+      <img src={logoImage} alt="Logo" />
       DVHub
     </Link>
     {isAuthorized() && (

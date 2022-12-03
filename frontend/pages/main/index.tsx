@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import store from "store";
 import { isAuthorized } from "utils/auth";
 
+import Landing from "../../components/Landing";
+
 const Main: FC = () => {
   const url = `/api/repositories/${store.user?.username}/`;
   const { data, loading } = useFetch<Repository[]>(url);
@@ -38,7 +40,7 @@ const Main: FC = () => {
           </div>
         </div>
       ) : (
-        <div>Sign In to continue</div>
+        <Landing />
       )}
     </div>
   );

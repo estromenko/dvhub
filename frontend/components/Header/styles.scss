@@ -33,7 +33,9 @@
   }
 
   &__logo {
+    align-items: center;
     color: white;
+    display: flex;
     font-size: 24px;
     font-weight: bold;
     text-decoration: none;
@@ -41,6 +43,10 @@
 
     &:hover {
       transform: scale(1.1);
+    }
+
+    img {
+      width: 40px;
     }
   }
 
