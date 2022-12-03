@@ -1,17 +1,15 @@
 import "./styles.scss";
 
 import SSHKeysList from "components/SSHKeysList";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 
 import store from "../../store";
 import { isAuthorized } from "../../utils/auth";
 
 const Profile: FC = () => {
-  useEffect(() => {
-    if (!isAuthorized()) {
-      window.location.assign("/auth");
-    }
-  }, []);
+  if (!isAuthorized()) {
+    window.location.assign("/auth");
+  }
 
   return (
     <div className="profile-page">

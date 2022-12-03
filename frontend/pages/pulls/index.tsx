@@ -6,6 +6,7 @@ import { observer } from "mobx-react-lite";
 import { FC, useEffect, useState } from "react";
 import store from "store";
 import { $fetch } from "utils/api";
+import { isAuthorized } from "utils/auth";
 
 const Pulls: FC = () => {
   const [pulls, setPulls] = useState<PullRequest[]>([]);
@@ -24,6 +25,10 @@ const Pulls: FC = () => {
     getPullRequests().finally();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [store.user]);
+
+  if (!isAuthorized()) {
+    window.location.assign("/auth");
+  }
 
   return (
     <div className="pulls-page">
