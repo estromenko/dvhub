@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import store from "store";
 import { isAuthorized } from "utils/auth";
 
+import CreateTheFirstOneButton from "../../components/CreateTheFirstOneButton";
+
 const Main: FC = () => {
   const url = `/api/repositories/${store.user?.username}/`;
   const { data, loading } = useFetch<Repository[]>(url);
@@ -47,13 +49,7 @@ const Main: FC = () => {
           ) : (
             <div>
               No repositories found.
-              <button
-                type="button"
-                className="main-page-sidebar__create-repository"
-                onClick={() => setIsModalOpen(true)}
-              >
-                Create the first one!
-              </button>
+              <CreateTheFirstOneButton onClick={() => setIsModalOpen(true)} />
               <CreateRepositoryModal
                 isOpen={isModalOpen}
                 setIsOpen={setIsModalOpen}

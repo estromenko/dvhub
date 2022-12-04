@@ -7,6 +7,7 @@ import PullRequestsList from "components/PullRequestsList";
 import { FC, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import CreateTheFirstOneButton from "../../../components/CreateTheFirstOneButton";
 import useFetch from "../../../hooks/useFetch";
 
 type Properties = {
@@ -41,13 +42,7 @@ const PullRequests: FC<Properties> = ({ repository }) => {
       {pullRequests.length <= 0 && (
         <h3>
           No pull requests found.&nbsp;
-          <button
-            type="button"
-            onClick={() => setModalOpened(true)}
-            className="repository-page-pull-requests__create-first-pull-request"
-          >
-            Create first one!
-          </button>
+          <CreateTheFirstOneButton onClick={() => setModalOpened(true)} />
         </h3>
       )}
       <CreatePullRequestModal

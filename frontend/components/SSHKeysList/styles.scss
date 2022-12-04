@@ -6,19 +6,6 @@
   text-align: center;
   width: 50%;
 
-  &__create-first-one-button {
-    background: none;
-    border: 0;
-    color: var(--primary);
-    font-size: 14px;
-    font-weight: bold;
-
-    &:hover {
-      cursor: pointer;
-      text-decoration: underline;
-    }
-  }
-
   &__add-button {
     margin-bottom: 10px;
   }

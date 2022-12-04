@@ -5,6 +5,7 @@ import { FC, useEffect, useState } from "react";
 
 import { $fetch } from "../../utils/api";
 import CreateSSHKeyModal from "../CreateSSHKeyModal";
+import CreateTheFirstOneButton from "../CreateTheFirstOneButton";
 import CreationButton from "../CreationButton";
 import SubmitButton from "../SubmitButton";
 
@@ -33,14 +34,8 @@ const SSHKeysList: FC = () => {
       <h2>SSH Keys</h2>
       {keys.length === 0 ? (
         <div>
-          No ssh keys found.
-          <button
-            type="button"
-            onClick={() => setModalOpened(true)}
-            className="ssh-keys-list__create-first-one-button"
-          >
-            Create the first one!
-          </button>
+          No ssh keys found.&nbsp;
+          <CreateTheFirstOneButton onClick={() => setModalOpened(true)} />
         </div>
       ) : (
         <>

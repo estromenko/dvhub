@@ -4,19 +4,4 @@
   &__creation-button {
     margin: 10px 0;
   }
-
-  &__create-first-issue {
-    background: none;
-    border: 0;
-    color: var(--primary);
-    font-size: 18px;
-    font-weight: bold;
-    outline: none;
-    text-decoration: none;
-
-    &:hover {
-      cursor: pointer;
-      text-decoration: underline;
-    }
-  }
 }

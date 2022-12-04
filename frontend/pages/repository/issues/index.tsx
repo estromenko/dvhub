@@ -8,6 +8,8 @@ import useFetch from "hooks/useFetch";
 import { FC, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import CreateTheFirstOneButton from "../../../components/CreateTheFirstOneButton";
+
 type Properties = {
   repository: Repository;
 };
@@ -33,13 +35,7 @@ const Issues: FC<Properties> = ({ repository }) => {
       ) : (
         <h3>
           No issues found.&nbsp;
-          <button
-            type="button"
-            onClick={() => setModalOpened(true)}
-            className="repository-page-issues__create-first-issue"
-          >
-            Create first one!
-          </button>
+          <CreateTheFirstOneButton onClick={() => setModalOpened(true)} />
         </h3>
       )}
       <CreateIssueModal

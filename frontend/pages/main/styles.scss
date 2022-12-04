@@ -18,20 +18,6 @@
   &__repo-list {
     padding: 10px;
   }
-
-  &__create-repository {
-    background: none;
-    border: 0;
-    color: var(--primary);
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 0;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 }
 
 .sidebar-repo-list {
