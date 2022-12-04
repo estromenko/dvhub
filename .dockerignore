@@ -1,0 +1,10 @@
+.git
+.idea
+.parcel-cache
+.vscode
+__pycache__
+_postgres
+_repositories
+dist
+node_modules
+*.log

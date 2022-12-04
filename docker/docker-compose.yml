@@ -1,0 +1,35 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:15.1-alpine3.17
+    environment:
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_DATABASE=${PG_NAME}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_PORT=${PG_PORT}
+    volumes:
+      - /srv/_dvhub_postgres:/var/lib/postgresql/data
+  backend:
+    image: dvhub
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      - PG_HOST=postgres
+      - TYPE=backend
+    volumes:
+      - /srv/_dvhub_repositories:/var/www/app/_repositories
+    env_file:
+      - .env
+  frontend:
+    image: dvhub
+    depends_on:
+      - backend
+    environment:
+      - TYPE=frontend
+    env_file:
+      - .env
+    ports:
+      - "80:80"
