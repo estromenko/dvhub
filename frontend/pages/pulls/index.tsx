@@ -32,7 +32,11 @@ const Pulls: FC = () => {
 
   return (
     <div className="pulls-page">
-      <PullRequestsList pulls={pulls} />
+      {pulls && pulls.length > 0 ? (
+        <PullRequestsList pulls={pulls} />
+      ) : (
+        <div>No pull requests found.</div>
+      )}
     </div>
   );
 };
