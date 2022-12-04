@@ -80,7 +80,9 @@ const Repository: FC = () => {
       </div>
       <div className="repository-content">
         <div className="repository-content__actions">
-          <RemoveButton text="Remove permanently" onClick={onRemoveClick} />
+          {repository.owner.username === store.user?.username && (
+            <RemoveButton text="Remove permanently" onClick={onRemoveClick} />
+          )}
         </div>
         <nav className="repository-content__navbar">
           <RepositoryNavbarLink
