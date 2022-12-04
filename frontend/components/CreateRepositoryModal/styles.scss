@@ -1,0 +1,29 @@
+.create-repository-modal {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    line-height: 1;
+    text-align: center;
+  }
+
+  &__input {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  &__submit {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__error {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+}

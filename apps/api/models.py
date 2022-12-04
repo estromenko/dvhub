@@ -35,7 +35,7 @@ class IssueComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.issue.name}: {self.owner.name}'
+        return f'{self.issue.name}: {self.owner.username}'
 
 
 class PullRequest(models.Model):

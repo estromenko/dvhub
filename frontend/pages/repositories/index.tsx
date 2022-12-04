@@ -2,20 +2,52 @@ import "./styles.scss";
 
 import { Repository } from "api/models";
 import useFetch from "hooks/useFetch";
-import { FC } from "react";
+import { FC, useState } from "react";
 import store from "store";
+
+import CreateRepositoryModal from "../../components/CreateRepositoryModal";
+import CreationButton from "../../components/CreationButton";
 
 const Repositories: FC = () => {
   const url = `/api/repositories/${store.user?.username}/`;
   const { data, loading } = useFetch<Repository[]>(url);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const onClick = () => {
+    setIsModalOpen(true);
+  };
 
   if (loading) {
     return <div />;
   }
 
+  if (!data || data.length === 0) {
+    return (
+      <div className="repositories-page">
+        No repositories found.&nbsp;
+        <button
+          type="button"
+          className="repositories-page__create-repository"
+          onClick={onClick}
+        >
+          Create the first one!
+        </button>
+        <CreateRepositoryModal
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="repositories-page">
-      {data?.map((repository) => (
+      <CreationButton
+        text="Create new repository"
+        className="repositories-page__creation-button"
+        onClick={() => setIsModalOpen(true)}
+      />
+      {data.map((repository) => (
         <div key={repository.id} className="repositories-page__repository">
           <a
             href={`/${repository.owner.username}/${repository.name}`}
@@ -40,6 +72,7 @@ const Repositories: FC = () => {
           </a>
         </div>
       ))}
+      <CreateRepositoryModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
     </div>
   );
 };

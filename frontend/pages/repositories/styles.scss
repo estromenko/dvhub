@@ -35,4 +35,22 @@
       text-decoration: underline;
     }
   }
+
+  &__create-repository {
+    background: none;
+    border: 0;
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__creation-button {
+    margin: 10px 0;
+  }
 }
