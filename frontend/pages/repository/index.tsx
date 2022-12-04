@@ -7,6 +7,9 @@ import useFetch from "hooks/useFetch";
 import { FC, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+import RemoveButton from "../../components/RemoveButton";
+import store from "../../store";
+import { $fetch } from "../../utils/api";
 import Code from "./code";
 import Issues from "./issues";
 import PullRequests from "./pulls";
@@ -37,6 +40,19 @@ const Repository: FC = () => {
     }
   };
 
+  const onRemoveClick = async () => {
+    const response = await $fetch(
+      `/api/repositories/${store.user!.username}/${name}/`,
+      {
+        method: "DELETE",
+      },
+    );
+
+    if (response?.status && response.status < 300) {
+      window.location.assign("/");
+    }
+  };
+
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
 
@@ -63,6 +79,9 @@ const Repository: FC = () => {
         <span>{repository.public ? "Public" : "Private"}</span>
       </div>
       <div className="repository-content">
+        <div className="repository-content__actions">
+          <RemoveButton text="Remove permanently" onClick={onRemoveClick} />
+        </div>
         <nav className="repository-content__navbar">
           <RepositoryNavbarLink
             text="Code"

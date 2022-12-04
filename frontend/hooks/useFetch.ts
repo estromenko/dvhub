@@ -3,6 +3,7 @@ import { $fetch } from "utils/api";
 
 export enum ErrorReason {
   Unauthorized,
+  NotFound,
 }
 
 export class FetchError extends Error {
@@ -16,6 +17,10 @@ const fetchWithError = async (url: string) => {
 
   if (response?.status === 401) {
     throw new FetchError(ErrorReason.Unauthorized);
+  }
+
+  if (response?.status === 404) {
+    throw new FetchError(ErrorReason.NotFound);
   }
 
   return response?.json();

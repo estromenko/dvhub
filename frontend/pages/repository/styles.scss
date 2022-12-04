@@ -12,6 +12,28 @@
 }
 
 .repository-content {
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+  }
+
+  &__remove-action {
+    background-color: #ff4848;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.03);
+    }
+  }
+
   &__navbar {
     border-bottom: 1px var(--primary) solid;
     display: flex;

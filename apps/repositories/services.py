@@ -1,3 +1,5 @@
+import shutil
+
 import git
 from django.conf import settings
 from git import NoSuchPathError
@@ -24,3 +26,7 @@ class RepositoryService:
             return git.Repo(settings.REPOSITORIES_DIR / username / name)
         except (git.InvalidGitRepositoryError, NoSuchPathError):
             return None
+
+    @staticmethod
+    def delete_repository(username, name):
+        shutil.rmtree(settings.REPOSITORIES_DIR / username / name)
