@@ -1,6 +1,7 @@
 import "./styles.scss";
 
 import { Repository } from "api/models";
+import Dropdown from "components/Dropdown";
 import NotFoundMessage from "components/NotFoundMessage";
 import RepositoryNavbarLink from "components/RepositoryNavbarLink";
 import useFetch from "hooks/useFetch";
@@ -26,6 +27,9 @@ const Repository: FC = () => {
   const { data, loading } = useFetch<Repository>(url);
 
   const repository = data;
+
+  const repositoryLink = window.location.href.split("?")[0].replace("\n", "");
+  const cloneText = `git clone ${repositoryLink}.git`;
 
   const getPage = () => {
     switch (page) {
@@ -81,7 +85,10 @@ const Repository: FC = () => {
       <div className="repository-content">
         <div className="repository-content__actions">
           {repository.owner.username === store.user?.username && (
-            <RemoveButton text="Remove permanently" onClick={onRemoveClick} />
+            <>
+              <Dropdown options={[cloneText]} title="Clone" />
+              <RemoveButton text="Remove permanently" onClick={onRemoveClick} />
+            </>
           )}
         </div>
         <nav className="repository-content__navbar">

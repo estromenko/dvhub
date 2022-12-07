@@ -14,6 +14,7 @@
 .repository-content {
   &__actions {
     display: flex;
+    gap: 10px;
     justify-content: flex-end;
     margin: 20px;
   }
