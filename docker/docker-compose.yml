@@ -20,7 +20,7 @@ services:
       - PG_HOST=postgres
       - TYPE=backend
     volumes:
-      - /srv/_dvhub_repositories:/var/www/app/_repositories
+      - /srv/_dvhub_data:/data
     env_file:
       - .env
   frontend:

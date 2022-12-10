@@ -11,12 +11,19 @@ class RepositoryService:
         repo_path = settings.REPOSITORIES_DIR / user.username / name
         repo = git.Repo.init(repo_path)
 
+        with repo.config_writer() as config:
+            config.set_value('user', 'email', user.email)
+            config.set_value('user', 'username', user.username)
+
         if add_readme:
             with open(repo_path / 'README.md', 'w', encoding='utf-8') as file:
                 file.write(f'## {name}')
 
             repo.git.add(repo_path / 'README.md')
             repo.git.commit(m='Initial commit')
+
+        git_command = git.cmd.Git(repo.working_dir)
+        git_command.update_server_info()
 
         return repo
 

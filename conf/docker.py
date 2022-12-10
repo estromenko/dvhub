@@ -41,4 +41,4 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': True,
 }
 
-REPOSITORIES_DIR = BASE_DIR / '_repositories'
+REPOSITORIES_DIR = Path(os.getenv('REPOSITORIES_DIR', BASE_DIR / '_repositories'))

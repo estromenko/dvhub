@@ -1,5 +1,10 @@
 #!/bin/sh
 
+export REPOSITORIES_DIR=/data/repositories
+
+mkdir -p /data/repositories
+chown -R nginx:nginx /data/repositories
+
 case "${TYPE}" in
 frontend)
     mkdir -p /run/nginx
