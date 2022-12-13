@@ -1,0 +1,56 @@
+name: Linters Runner
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.10'
+
+      - name: Set up NodeJS 18.3
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.3'
+
+      - name: Install python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install python development dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Install NodeJS dependencies
+        run: yarn
+
+      - name: Run pylint
+        if: success() || failure()
+        run: |
+             find -name "*.py" -not -path "./.git/*" | xargs pylint
+
+      - name: Run mypy
+        if: success() || failure()
+        run: |
+             find -name "*.py" -not -path "./.git/*" | xargs mypy
+
+      - name: Run eslint
+        if: success() || failure()
+        run: yarn eslint
+
+      - name: Run prettier
+        if: success() || failure()
+        run: yarn prettier
+
+      - name: Run stylelint
+        if: success() || failure()
+        run: yarn stylelint
