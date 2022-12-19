@@ -23,6 +23,7 @@ $ pip3 install -r requirements-dev.txt  # Only if you need development tools
 3) Run PostgreSQL database inside docker container:
 ```bash
 $ docker run --rm --name dvhub_postgres -v /srv/_dvhub_postgres:/var/lib/postgresql/data -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres:15
+$ docker run --rm -it --link dvhub_postgres:dvhub_postgres -e PGPASSWORD=secret postgres:15 createdb -h dvhub_postgres -U postgres dvhub
 ```
 
 4) Create `.env` file like this:
