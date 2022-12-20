@@ -12,6 +12,18 @@ export const logout = () => {
   Cookie.remove(refreshTokenKey);
 };
 
+export const setAccessToken = (accessToken: string) => {
+  Cookie.set(accessTokenKey, accessToken, {
+    expires: new Date().getDate() + 5 * 60000, // 5 minutes
+  });
+};
+
+export const setRefreshToken = (refreshToken: string) => {
+  Cookie.set(refreshTokenKey, refreshToken, {
+    expires: 1, // 1 day
+  });
+};
+
 export const updateTokens = async () => {
   const refreshToken = Cookie.get(refreshTokenKey);
 
@@ -25,8 +37,8 @@ export const updateTokens = async () => {
 
   if (response.status === 200) {
     const data = await response.json();
-    Cookie.set(accessTokenKey, data.access);
-    Cookie.set(refreshTokenKey, data.refresh);
+    setAccessToken(data.access);
+    setRefreshToken(data.refresh);
   }
 };
 

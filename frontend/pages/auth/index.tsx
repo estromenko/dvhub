@@ -1,10 +1,10 @@
 import "./styles.scss";
 
-import Cookie from "js-cookie";
 import { FC, useState } from "react";
 
 import Input from "../../components/Input";
 import SubmitButton from "../../components/SubmitButton";
+import { setAccessToken, setRefreshToken } from "../../utils/auth";
 
 const Auth: FC = () => {
   const [signUpSelected, setSignUpSelected] = useState<boolean>(true);
@@ -37,8 +37,8 @@ const Auth: FC = () => {
 
     const data = await response.json();
 
-    Cookie.set("accessToken", data.access);
-    Cookie.set("refreshToken", data.refresh);
+    setAccessToken(data.access);
+    setRefreshToken(data.refresh);
 
     window.location.assign("/");
   };
@@ -63,8 +63,8 @@ const Auth: FC = () => {
 
     const data = await response.json();
 
-    Cookie.set("accessToken", data.access);
-    Cookie.set("refreshToken", data.refresh);
+    setAccessToken(data.access);
+    setRefreshToken(data.refresh);
 
     window.location.assign("/");
   };
