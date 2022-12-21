@@ -2,6 +2,14 @@ import Cookie from "js-cookie";
 
 import { accessTokenKey, updateTokens } from "./auth";
 
+const getCookie = (name: string) => {
+  const regexp = new RegExp(`${name}=[^;]+`);
+  const cookies = regexp.exec(document.cookie);
+  const cookie = cookies ? cookies.toString().replace(/^[^=]+./, "") : "";
+
+  return decodeURIComponent(cookie);
+};
+
 export const $fetch = async (
   url: string,
   init?: RequestInit,
@@ -14,6 +22,7 @@ export const $fetch = async (
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
+        "X-CSRFToken": getCookie("csrftoken"),
         ...init?.headers,
       },
     });

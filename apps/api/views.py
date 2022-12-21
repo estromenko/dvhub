@@ -2,6 +2,8 @@
 
 from django.contrib.auth import get_user_model
 from django.db.models.functions import Extract
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
@@ -22,6 +24,7 @@ from apps.api.serializers import (
 User = get_user_model()
 
 
+@method_decorator(csrf_protect, name='dispatch')
 class UserPullRequestsAPIView(generics.ListAPIView):
     """Вьюха для получения pull request'ов пользователя. """
 
@@ -42,6 +45,7 @@ class UserPullRequestsAPIView(generics.ListAPIView):
         return queryset.filter(owner_id=self.kwargs['pk'])
 
 
+@method_decorator(csrf_protect, name='dispatch')
 class PullRequestViewSet(viewsets.ModelViewSet):  # pylint: disable=too-many-ancestors
     """ViewSet для управления pull request'ами. """
 
@@ -51,6 +55,7 @@ class PullRequestViewSet(viewsets.ModelViewSet):  # pylint: disable=too-many-anc
     filterset_fields = ['name', 'repository__name']
 
 
+@method_decorator(csrf_protect, name='dispatch')
 class IssueViewSet(viewsets.ModelViewSet):  # pylint: disable=too-many-ancestors
     """ViewSet для управления issue'сами. """
 
@@ -71,6 +76,7 @@ class UserIssuesAPIView(generics.ListAPIView):
         return self.queryset.filter(owner_id=self.kwargs['pk'])
 
 
+@method_decorator(csrf_protect, name='dispatch')
 class PullRequestCommentsAPIView(generics.ListCreateAPIView):
     queryset = PullRequestComment.objects.all()
     serializer_class = PullRequestCommentSerializer
@@ -79,6 +85,7 @@ class PullRequestCommentsAPIView(generics.ListCreateAPIView):
         return super().get_queryset().filter(pull_request_id=self.kwargs['pk'])
 
 
+@method_decorator(csrf_protect, name='dispatch')
 class IssueCommentsAPIView(generics.ListCreateAPIView):
     queryset = IssueComment.objects.all()
     serializer_class = IssueCommentSerializer
