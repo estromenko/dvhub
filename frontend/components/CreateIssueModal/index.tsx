@@ -13,11 +13,7 @@ type Properties = {
   repository?: Repository;
 };
 
-const CreateIssueModal: FC<Properties> = ({
-  isOpen,
-  setIsOpen,
-  repository,
-}) => {
+const CreateIssueModal: FC<Properties> = ({ isOpen, setIsOpen, repository }) => {
   const [name, setName] = useState<string>("");
   const [error, setError] = useState<string>("");
 

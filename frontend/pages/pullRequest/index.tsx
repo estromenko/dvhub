@@ -14,11 +14,7 @@ const PullRequest: FC = () => {
   const { id } = useParams();
   const [commentText, setCommentText] = useState<string>("");
 
-  const {
-    data: pullRequest,
-    error,
-    loading,
-  } = useFetch<PullRequest>(`/api/pulls/${id}/`);
+  const { data: pullRequest, error, loading } = useFetch<PullRequest>(`/api/pulls/${id}/`);
 
   const onWriteCommentClick = async () => {
     if (!commentText) {
@@ -70,9 +66,7 @@ const PullRequest: FC = () => {
     <div className="pull-request-page">
       <div className="pull-request-page__info">
         <div className="pull-request-page__info-row">
-          <span className="pull-request-page__status">
-            ({pullRequest.status})
-          </span>
+          <span className="pull-request-page__status">({pullRequest.status})</span>
           <Link
             to={`/${pullRequest.owner.username}/${pullRequest.repository.name}`}
             className="pull-request-page__repository-link"
@@ -83,17 +77,11 @@ const PullRequest: FC = () => {
         </div>
         <div className="pull-request-page__branches">
           From
-          <div className="pull-request-page__branch">
-            {pullRequest.branch_from}
-          </div>
+          <div className="pull-request-page__branch">{pullRequest.branch_from}</div>
           to
-          <div className="pull-request-page__branch">
-            {pullRequest.branch_to}
-          </div>
+          <div className="pull-request-page__branch">{pullRequest.branch_to}</div>
         </div>
-        <div className="pull-request-page__created-at">
-          Created at {pullRequest.created_at}
-        </div>
+        <div className="pull-request-page__created-at">Created at {pullRequest.created_at}</div>
       </div>
       <div className="pull-request-page__actions">
         Actions:
@@ -113,10 +101,8 @@ const PullRequest: FC = () => {
         {pullRequest.comments.map((comment) => (
           <div key={comment.id} className="pull-request-page__comment">
             <div className="pull-request-page__comment-info">
-              <span className="pull-request-page__comment-owner">
-                {comment.owner.username}
-              </span>{" "}
-              at {comment.created_at}
+              <span className="pull-request-page__comment-owner">{comment.owner.username}</span> at{" "}
+              {comment.created_at}
             </div>
             {comment.text}
           </div>

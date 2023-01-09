@@ -45,12 +45,9 @@ const Repository: FC = () => {
   };
 
   const onRemoveClick = async () => {
-    const response = await $fetch(
-      `/api/repositories/${store.user!.username}/${name}/`,
-      {
-        method: "DELETE",
-      },
-    );
+    const response = await $fetch(`/api/repositories/${store.user!.username}/${name}/`, {
+      method: "DELETE",
+    });
 
     if (response?.status && response.status < 300) {
       window.location.assign("/");

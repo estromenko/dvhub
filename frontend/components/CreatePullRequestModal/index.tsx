@@ -13,18 +13,10 @@ type Properties = {
   repository?: Repository;
 };
 
-const CreatePullRequestModal: FC<Properties> = ({
-  isOpen,
-  setIsOpen,
-  repository,
-}) => {
+const CreatePullRequestModal: FC<Properties> = ({ isOpen, setIsOpen, repository }) => {
   const [name, setName] = useState<string>("");
-  const [branchFrom, setBranchFrom] = useState<string | undefined>(
-    repository?.branches[0],
-  );
-  const [branchTo, setBranchTo] = useState<string | undefined>(
-    repository?.branches[0],
-  );
+  const [branchFrom, setBranchFrom] = useState<string | undefined>(repository?.branches[0]);
+  const [branchTo, setBranchTo] = useState<string | undefined>(repository?.branches[0]);
   const [error, setError] = useState<string>("");
 
   const createPullRequest = async () => {
@@ -75,9 +67,7 @@ const CreatePullRequestModal: FC<Properties> = ({
   return (
     <CustomModal isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className="create-pull-request-modal">
-        <h3 className="create-pull-request-modal__title">
-          Create new pull request
-        </h3>
+        <h3 className="create-pull-request-modal__title">Create new pull request</h3>
         <label>
           Name
           <Input
@@ -88,10 +78,7 @@ const CreatePullRequestModal: FC<Properties> = ({
         <div className="create-pull-request-modal__branch-selectors">
           <label>
             From
-            <select
-              value={branchFrom}
-              onChange={(event) => setBranchFrom(event.target.value)}
-            >
+            <select value={branchFrom} onChange={(event) => setBranchFrom(event.target.value)}>
               {repository?.branches.map((branch) => (
                 <option key={branch}>{branch}</option>
               ))}
@@ -99,10 +86,7 @@ const CreatePullRequestModal: FC<Properties> = ({
           </label>
           <label>
             To
-            <select
-              value={branchTo}
-              onChange={(event) => setBranchTo(event.target.value)}
-            >
+            <select value={branchTo} onChange={(event) => setBranchTo(event.target.value)}>
               {repository?.branches.map((branch) => (
                 <option key={branch}>{branch}</option>
               ))}

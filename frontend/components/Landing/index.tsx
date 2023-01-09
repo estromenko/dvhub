@@ -9,9 +9,7 @@ const Landing: FC = () => (
       <img src={logoImage} alt="Logo" />
       DVHub
     </h1>
-    <div className="landing__subtitle">
-      Damn vulnerable development platform
-    </div>
+    <div className="landing__subtitle">Damn vulnerable development platform</div>
   </div>
 );
 

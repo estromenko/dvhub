@@ -12,11 +12,7 @@ const Dropdown: FC<Properties> = ({ title, options }) => {
 
   return (
     <div className="dropdown">
-      <button
-        type="button"
-        className="dropdown__title"
-        onClick={() => setOpen(!open)}
-      >
+      <button type="button" className="dropdown__title" onClick={() => setOpen(!open)}>
         {title}
       </button>
       {open && (

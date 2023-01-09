@@ -25,8 +25,7 @@ const Pulls: FC = () => {
       let url = `/api/user/${store.user?.id}/pulls/`;
 
       const date = new Date();
-      const value =
-        period === "year" ? date.getFullYear() : date.getMonth() + 1;
+      const value = period === "year" ? date.getFullYear() : date.getMonth() + 1;
 
       if (period) {
         url += `?period=${period}&value=${value}`;

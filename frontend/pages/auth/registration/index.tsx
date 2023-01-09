@@ -46,18 +46,11 @@ const Registration: FC = () => {
     <AuthForm onClick={register} error={error}>
       <label className="form-fields__input-row">
         Username
-        <Input
-          name="username"
-          onChange={(event) => setUsername(event.target.value)}
-        />
+        <Input name="username" onChange={(event) => setUsername(event.target.value)} />
       </label>
       <label className="form-fields__input-row">
         Email
-        <Input
-          type="email"
-          required
-          onChange={(event) => setEmail(event.target.value)}
-        />
+        <Input type="email" required onChange={(event) => setEmail(event.target.value)} />
       </label>
       <label className="form-fields__input-row">
         Password

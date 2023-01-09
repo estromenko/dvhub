@@ -35,10 +35,7 @@ const Login: FC = () => {
     <AuthForm onClick={login} error={error}>
       <label className="form-fields__input-row">
         Username
-        <Input
-          name="username"
-          onChange={(event) => setUsername(event.target.value)}
-        />
+        <Input name="username" onChange={(event) => setUsername(event.target.value)} />
       </label>
       <label className="form-fields__input-row">
         Password

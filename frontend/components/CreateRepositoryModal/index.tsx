@@ -43,22 +43,14 @@ const CreateRepositoryModal: FC<Properties> = ({ isOpen, setIsOpen }) => {
   return (
     <CustomModal isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className="create-repository-modal">
-        <h3 className="create-repository-modal__title">
-          Create new repository
-        </h3>
+        <h3 className="create-repository-modal__title">Create new repository</h3>
         <label className="create-repository-modal__input">
           Name
-          <Input
-            onChange={(event) => setName(event.target.value)}
-            value={name}
-          />
+          <Input onChange={(event) => setName(event.target.value)} value={name} />
         </label>
         <label className="create-repository-modal__input">
           Description
-          <Input
-            onChange={(event) => setDescription(event.target.value)}
-            value={description}
-          />
+          <Input onChange={(event) => setDescription(event.target.value)} value={description} />
         </label>
         <label className="create-repository-modal__input">
           Public
@@ -68,11 +60,7 @@ const CreateRepositoryModal: FC<Properties> = ({ isOpen, setIsOpen }) => {
             onChange={(event) => setIsPublic(event.target.checked)}
           />
         </label>
-        {error ? (
-          <div className="create-repository-modal__error">{error}</div>
-        ) : (
-          ""
-        )}
+        {error ? <div className="create-repository-modal__error">{error}</div> : ""}
         <div className="create-repository-modal__submit">
           <SubmitButton onClick={onSubmit}>Create</SubmitButton>
         </div>

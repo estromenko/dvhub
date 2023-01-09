@@ -2,10 +2,7 @@ import "./style.scss";
 
 import { ButtonHTMLAttributes, DetailedHTMLProps, FC } from "react";
 
-type Properties = DetailedHTMLProps<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
->;
+type Properties = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 const SubmitButton: FC<Properties> = (props) => (
   <button

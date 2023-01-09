@@ -19,10 +19,7 @@ const PullRequestsList: FC<Properties> = ({ pulls }) => (
           >
             {pullRequest.owner.username}/{pullRequest.repository.name}
           </Link>
-          <Link
-            to={`/pulls/${pullRequest.id}`}
-            className="pulls-list__pull-link"
-          >
+          <Link to={`/pulls/${pullRequest.id}`} className="pulls-list__pull-link">
             {pullRequest.name}
           </Link>
         </div>

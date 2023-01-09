@@ -75,9 +75,7 @@ const Issue: FC = () => {
           </Link>
           &nbsp;{issue.name}
         </div>
-        <div className="issue-page__created-at">
-          Created at {issue.created_at}
-        </div>
+        <div className="issue-page__created-at">Created at {issue.created_at}</div>
       </div>
       <div className="issue-page__actions">
         Actions:
@@ -94,10 +92,8 @@ const Issue: FC = () => {
         {issue.comments.map((comment) => (
           <div key={comment.id} className="issue-page__comment">
             <div className="issue-page__comment-info">
-              <span className="issue-page__comment-owner">
-                {comment.owner.username}
-              </span>{" "}
-              at {comment.created_at}
+              <span className="issue-page__comment-owner">{comment.owner.username}</span> at{" "}
+              {comment.created_at}
             </div>
             {comment.text}
           </div>

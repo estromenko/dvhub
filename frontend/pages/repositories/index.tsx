@@ -23,10 +23,7 @@ const Repositories: FC = () => {
       <div className="repositories-page">
         No repositories found.&nbsp;
         <CreateTheFirstOneButton onClick={() => setIsModalOpen(true)} />
-        <CreateRepositoryModal
-          isOpen={isModalOpen}
-          setIsOpen={setIsModalOpen}
-        />
+        <CreateRepositoryModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       </div>
     );
   }

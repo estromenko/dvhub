@@ -30,9 +30,7 @@ const Main: FC = () => {
   return (
     <div className="main-page">
       <div className="main-page-sidebar">
-        <div className="main-page-sidebar__account-link">
-          {store.user?.username}
-        </div>
+        <div className="main-page-sidebar__account-link">{store.user?.username}</div>
         <div className="sidebar-repo-list main-page-sidebar__repo-list">
           {repositories.length > 0 ? (
             <>
@@ -50,10 +48,7 @@ const Main: FC = () => {
             <div>
               No repositories found.
               <CreateTheFirstOneButton onClick={() => setIsModalOpen(true)} />
-              <CreateRepositoryModal
-                isOpen={isModalOpen}
-                setIsOpen={setIsModalOpen}
-              />
+              <CreateRepositoryModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
             </div>
           )}
         </div>

@@ -10,11 +10,7 @@ type Properties = {
 };
 
 const CreationButton: FC<Properties> = ({ text, onClick, className }) => (
-  <button
-    type="button"
-    onClick={onClick}
-    className={`creation-button ${className || ""}`}
-  >
+  <button type="button" onClick={onClick} className={`creation-button ${className || ""}`}>
     <img src={addImage} alt="Add" />
     {text}
   </button>

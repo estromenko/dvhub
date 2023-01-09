@@ -42,28 +42,16 @@ const Header: FC = () => (
 
       <div />
       {isAuthorized() ? (
-        <Link
-          to="/auth/login"
-          className="header__link header__auth-link"
-          onClick={logout}
-        >
+        <Link to="/auth/login" className="header__link header__auth-link" onClick={logout}>
           Logout
         </Link>
       ) : (
         <div className="header__auth-links">
-          <Link
-            to="/auth/login"
-            className="header__link header__auth-link"
-            onClick={logout}
-          >
+          <Link to="/auth/login" className="header__link header__auth-link" onClick={logout}>
             Sign In
           </Link>
           <div>/</div>
-          <Link
-            to="/auth/registration"
-            className="header__link header__auth-link"
-            onClick={logout}
-          >
+          <Link to="/auth/registration" className="header__link header__auth-link" onClick={logout}>
             Sign Up
           </Link>
         </div>

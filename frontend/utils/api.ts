@@ -10,10 +10,7 @@ const getCookie = (name: string) => {
   return decodeURIComponent(cookie);
 };
 
-export const $fetch = async (
-  url: string,
-  init?: RequestInit,
-): Promise<Response | undefined> => {
+export const $fetch = async (url: string, init?: RequestInit): Promise<Response | undefined> => {
   const makeRequest = async () => {
     const accessToken = Cookie.get(accessTokenKey);
 

@@ -10,11 +10,7 @@ type Properties = {
   setIsOpen: (isOpen: boolean) => unknown;
 };
 
-const CustomModal: FC<PropsWithChildren<Properties>> = ({
-  children,
-  isOpen,
-  setIsOpen,
-}) => (
+const CustomModal: FC<PropsWithChildren<Properties>> = ({ children, isOpen, setIsOpen }) => (
   <ReactModal
     isOpen={isOpen}
     onRequestClose={() => setIsOpen(false)}

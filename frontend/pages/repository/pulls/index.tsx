@@ -17,9 +17,7 @@ type Properties = {
 const PullRequests: FC<Properties> = ({ repository }) => {
   const { name } = useParams();
   const [modalOpened, setModalOpened] = useState<boolean>(false);
-  const { data, loading } = useFetch<PullRequest[]>(
-    `/api/pulls/?repository__name=${name}`,
-  );
+  const { data, loading } = useFetch<PullRequest[]>(`/api/pulls/?repository__name=${name}`);
 
   const pullRequests = data || [];
 

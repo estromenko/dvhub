@@ -38,11 +38,7 @@ const Issues: FC<Properties> = ({ repository }) => {
           <CreateTheFirstOneButton onClick={() => setModalOpened(true)} />
         </h3>
       )}
-      <CreateIssueModal
-        isOpen={modalOpened}
-        setIsOpen={setModalOpened}
-        repository={repository}
-      />
+      <CreateIssueModal isOpen={modalOpened} setIsOpen={setModalOpened} repository={repository} />
     </div>
   );
 };
