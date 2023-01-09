@@ -8,6 +8,10 @@ on:
     branches:
       - '*'
 
+env:
+  SECRET_KEY: secret
+  DJANGO_SETTINGS_MODULE: conf.docker
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -36,7 +40,7 @@ jobs:
       - name: Run pylint
         if: success() || failure()
         run: |
-             find -name "*.py" -not -path "./.git/*" | xargs pylint --load-plugins pylint_django --django-settings-module=conf.docker
+             find -name "*.py" -not -path "./.git/*" | xargs pylint --load-plugins pylint_django
 
       - name: Run mypy
         if: success() || failure()
