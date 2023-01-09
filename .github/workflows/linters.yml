@@ -36,7 +36,7 @@ jobs:
       - name: Run pylint
         if: success() || failure()
         run: |
-             find -name "*.py" -not -path "./.git/*" | xargs pylint
+             find -name "*.py" -not -path "./.git/*" | xargs pylint --load-plugins pylint_django --django-settings-module=conf.docker
 
       - name: Run mypy
         if: success() || failure()
