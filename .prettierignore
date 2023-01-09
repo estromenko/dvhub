@@ -1,0 +1,8 @@
+.github
+.husky
+.mypy_cache
+.parcel-cache
+.venv
+dist
+docker
+node_modules
