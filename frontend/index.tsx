@@ -5,7 +5,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
-import Auth from "./pages/auth";
+import Login from "./pages/auth/login";
+import Registration from "./pages/auth/registration";
 import Issue from "./pages/issue";
 import Issues from "./pages/issues";
 import Main from "./pages/main";
@@ -39,10 +40,11 @@ const App = () => {
         <Route path="/pulls" element={<Pulls />} />
         <Route path="/issues/:id" element={<Issue />} />
         <Route path="/issues" element={<Issues />} />
-        <Route path="/:username/:name" element={<Repository />} />
-        <Route path="/auth" element={<Auth />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/registration" element={<Registration />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/repositories" element={<Repositories />} />
+        <Route path="/:username/:name" element={<Repository />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
