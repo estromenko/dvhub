@@ -5,7 +5,15 @@
   "scripts": {
     "prepare": "husky install",
     "dev": "parcel watch frontend/index.tsx",
-    "build": "parcel build frontend/index.tsx"
+    "build": "parcel build frontend/index.tsx",
+    "prettier": "prettier . -c .prettierrc.json",
+    "prettier:fix": "prettier . -c .prettierrc.json --write",
+    "eslint": "eslint frontend",
+    "eslint:fix": "eslint frontend --fix",
+    "stylelint": "stylelint frontend/**/*.{css,scss}",
+    "stylelint:fix": "stylelint frontend/**/*.{css,scss} --fix",
+    "lint": "yarn stylelint && yarn prettier && yarn eslint",
+    "lint:fix": "yarn stylelint:fix && yarn prettier:fix && yarn eslint:fix"
   },
   "dependencies": {
     "classnames": "^2.3.2",
